@@ -1,6 +1,12 @@
 #include <iostream>
 using namespace std;
 
+/*
+	Name : Muhammad Umar
+	Roll no. : CT - 24028
+	Class : CSIT Section A Batch 24
+*/
+
 class Node{
 public: 
     int data;
