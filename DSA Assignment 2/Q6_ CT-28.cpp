@@ -30,13 +30,20 @@ public:
     }
 
     void push(int val) {
-        Node* n = new Node(val);
-
-        if (empty()) minVal = val;
-        else minVal = min(val, minVal);
-
-        n->next = top;
-        top = n;
+        if (empty()) {
+            top = new Node(val);
+            minVal = val;
+        } else {
+            if (val <= minVal) {
+                Node* n = new Node(minVal); 
+                n->next = top;
+                top = n;
+                minVal = val;
+            }
+            Node* n = new Node(val);
+            n->next = top;
+            top = n;
+        }
     }
 
     int pop() {
@@ -47,14 +54,14 @@ public:
         top = top->next;
         delete temp;
 
-        if (!empty()) {
-            Node* current = top;
-            minVal = current->data;
-            while (current != nullptr) {
-                minVal = min(minVal, current->data);
-                current = current->next;
-            }
-        } else minVal = INT_MAX;
+        if (value == minVal && !empty()) {
+            minVal = top->data;  
+            temp = top;
+            top = top->next;
+            delete temp;
+        }
+
+        if (empty()) minVal = INT_MAX;
 
         return value;
     }
